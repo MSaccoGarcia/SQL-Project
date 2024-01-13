@@ -1,0 +1,14 @@
+Se nos solicita realizar una consulta para saber cuál es el producto más vendido.
+Dicha consulta debe devolver un solo registro (una sola fila) donde se exprese el ID de Producto, el Nombre del producto y las veces que éste fue vendido.	
+
+SOLUCIÓN:
+ 
+SELECT sod.ProductID, pp.Name, COUNT(sod.OrderQty) AS 'Cantidad Vendida por Producto' 
+FROM Sales.SalesORderDetail AS sod
+JOIN Production.Product AS pp
+ON sod.productID = pp.productID
+GROUP BY sod.ProductID, pp.Name
+HAVING COUNT(sod.OrderQty) = (  SELECT MAX(Tabla.[Cantidad Vendida por Producto])
+                FROM (SELECT COUNT(OrderQty) AS 'Cantidad Vendida por Producto', ProductID
+                FROM Sales.SalesORderDetail
+                GROUP BY ProductID) AS Tabla)
