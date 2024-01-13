@@ -1,0 +1,25 @@
+Se desea obtener un reporte detallado que muestre, el nombre, apellido, teléfono y dirección de correo de los clientes, la ciudad de cada uno, lista de productos que compró (sin repetir), cantidad de unidades
+compradas de cada producto y el nombre del modelo.
+
+SOLUCIÓN:
+SELECT pp.firstname AS 'Nombre', pp.lastname AS 'Apellido', ppp.phonenumber AS 'Número de teléfono', 
+pea.EmailAddress 'Dirección de correo electrónico', sst.name AS 'Nombre de ciudad/país', 
+ppr.name 'Nombre de producto', sum(ssod.orderqty) as 'Suma de cantidad ordenada', ppm.name AS 'Nombre de modelo'
+FROM sales.customer AS sc
+JOIN person.person AS pp
+ON sc.PersonID = pp.BusinessEntityID
+JOIN person.PersonPhone AS ppp
+ON pp.BusinessEntityID = ppp.BusinessEntityID
+JOIN person.EmailAddress AS pea
+ON pp.BusinessEntityID = pea.BusinessEntityID
+JOIN sales.SalesTerritory AS sst
+ON sc.TerritoryID = sst.TerritoryID
+JOIN sales.SalesOrderHeader AS ssoh
+ON sc.CustomerID = ssoh.CustomerID
+JOIN sales.SalesOrderDetail AS ssod
+ON ssoh.SalesOrderID = ssod.SalesOrderID
+JOIN production.Product AS ppr
+ON ssod.ProductID = ppr.ProductID
+JOIN production.ProductModel AS ppm 
+ON ppr.ProductModelID = ppm.ProductModelID
+GROUP BY pp.firstname, pp.lastname, ppp.phonenumber, pea.EmailAddress, sst.name, ppr.name, ppm.name
