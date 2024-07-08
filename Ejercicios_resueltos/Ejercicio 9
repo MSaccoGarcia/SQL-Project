@@ -1,8 +1,10 @@
-Propuesta de consulta a ejecutar: 
+Propuesta de consulta a ejecutar:
+
 Se desea obtener un reporte detallado que muestre, el nombre, apellido, teléfono y dirección de correo de los clientes, la ciudad de cada uno, lista de productos que compró (sin repetir), cantidad de unidades
 compradas de cada producto y el nombre del modelo.
 
 SOLUCIÓN:
+
 SELECT pp.firstname AS 'Nombre', pp.lastname AS 'Apellido', ppp.phonenumber AS 'Número de teléfono', 
 pea.EmailAddress 'Dirección de correo electrónico', sst.name AS 'Nombre de ciudad/país', 
 ppr.name 'Nombre de producto', sum(ssod.orderqty) as 'Suma de cantidad ordenada', ppm.name AS 'Nombre de modelo'
