@@ -1,3 +1,5 @@
+Propuesta de consulta a ejecutar: 
+
 Se nos solicita realizar una consulta para saber cuál es el producto más vendido.
 Dicha consulta debe devolver un solo registro (una sola fila) donde se exprese el ID de Producto, el Nombre del producto y las veces que éste fue vendido.	
 
